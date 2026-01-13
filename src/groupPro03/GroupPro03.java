@@ -2,6 +2,7 @@ package groupPro03;
 
 import java.util.Scanner;
 
+
 /*
 B. 용돈관리 & 소비 패턴 분석
 	사용자가 일정기간동안의 지출을 입력하면 지출 내역을 배열에 저장하고 종료 시 소비 패턴을 분석하는 프로그램
@@ -136,7 +137,65 @@ public class GroupPro03 {
 			
 			
 			// 항목별 지출 합계 기능 작업 시작 - 재민
+			if(optionSelect == 2) {
+				
+//				항목별 지출 횟수 저장 변수	
+				int[] categoryCountSum = new int[4];				//[기타] [식비] [교통] [쇼핑] 순
 			
+//			[로직]
+//				1. 지출 사유 분류(for문)
+//				- 초기식 : i = 0
+//				- 조건식 : i < daysCount
+//				- 증감식 : i++
+				for(int i = 0; i < daysCount; i++) { 
+//					1.switch문
+					switch(arrPayReason[i]) {
+//					- 조건 : arrPayReason[i] = 1
+					case 1 :
+//						1. 식비 변수 1업
+						categoryCountSum[1]++;
+//						2. categoryPaymentSum[1] + arrPaymentDetail[i]
+						categoryPaymentSum[1] += arrPaymentDetail[i];
+						continue;
+//					- 조건 : arrPayReason[i] = 2
+					case 2 :
+//						1. 교통 변수 1업
+						categoryCountSum[2]++;
+//						2. categoryPaymentSum[2] + arrPaymentDetail[i]
+						categoryPaymentSum[2] += arrPaymentDetail[i];
+						continue;
+//					- 조건 : arrPayReason[i] = 3
+					case 3 :
+//						1. 쇼핑 변수 1업
+						categoryCountSum[3]++;
+//						2. categoryPaymentSum[3] + arrPaymentDetail[i]
+						categoryPaymentSum[3] += arrPaymentDetail[i];
+						continue;
+//					- 그 외
+					default :
+//						1. 기타 변수 1업
+						categoryCountSum[0]++;
+//						2.categoryPaymentSum[0] +arrPaymentDetail[i]
+						categoryPaymentSum[0] += arrPaymentDetail[i];
+						continue;
+					}//switch
+
+				}//for
+				
+//				2. 내용출력
+				System.out.println("기타\t식비\t교통\t쇼핑");
+				for(int i = 0; i < 4; i++) { 
+					System.out.print(categoryCountSum[i] + "번\t");	//항목 사용 횟수
+				}//for
+				
+				System.out.println();
+				for(int i = 0; i < 4; i++) {
+					System.out.print(categoryPaymentSum[i] + "\t");	//항목별 총 금액
+				}//for
+				
+				System.out.println();
+				
+			}//if
 			
 			// 항목별 지출 합계 기능 작업 종료 
 			
