@@ -254,23 +254,32 @@ public class GroupPro03 {
 			
 			
 			// 지출 금액이 연속으로 증가하는 패턴 감지 기능 작업 종료
+			// 예산 초과 여부 판단 기능 작업 시작 - (최종수정 260113 16:19)지수v0.2
+
+			if (totalPaymentSum == 0) { // 분기별 노출 메시지 저장
+				payRoutineMsg = "이번달 소비내역이 없습니다!"; // 지출 소비 자체가 0일때
+			} else if (totalPaymentSum > budget) {
+				payRoutineMsg = "예산초과 입니다!!";
+			} else {
+				payRoutineMsg = "안정적인 소비 습관입니다.";
+            }
 			
+//			5번 옵션시 분기별 메시지 출력 추가
 			
-			// 예산 초과 여부 판단 기능 작업 시작 - 지수
-			
-            if(optionSelect == 5) {
+            if(optionSelect == 5) { // 5번 메뉴로 바로 진입시 노출
+//            	System.out.println(); // 의미없음 가독성용
                 if(totalPaymentSum == 0) {
-                   payRoutineMsg = "이번달 소비내역이 없습니다"; // 지출 소비 자체가 0일때
+                	System.out.println("\n이번달 소비내역이 없습니다\n");
                 } else if(totalPaymentSum > budget) {
-                   payRoutineMsg = "예산을 초과하는 소비가 잦습니다. 지출 관리가 필요합니다.";
+                	System.out.println("\n예산을 초과하는 소비가 잦습니다. 지출 관리가 필요합니다.\n");
                 } else {
-                   payRoutineMsg = "안정적인 소비 습관입니다.";
-                }
+                	System.out.println("\n안정적인 소비 습관입니다.\n");
+				}
+//                System.out.println();//// 의미없음 가독성용
              }
-			
+            
 			
 			// 예산 초과 여부 판단 기능 작업 종료
-		}
 		
 		System.out.printf("총 지출 금액 : %d, 가장 많이 사용한 항목 : %s, 소비 습관 판단 메시지 : %s\n"
 				, totalPaymentSum, mostPayCategory, payRoutineMsg);
