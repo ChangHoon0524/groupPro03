@@ -60,8 +60,8 @@ public class GroupPro03 {
 		int count = 0;
 		
 		// 지출항목 상수 선언
-		// 식사 : 0, 교통 : 1, 쇼핑 : 2, 기타 : 3
-		final int EATTING = 1, TRANSPORT = 2, SHOPPING = 3, ETC = 0;
+		// 기타 : 0, 식비 : 1, 교통 : 2, 쇼핑 : 3
+		final int ETC = 0, EATTING = 1, TRANSPORT = 2, SHOPPING = 3;
 		
 		// 배열 선언
 		// 지출금 내역 저장 배열
@@ -107,53 +107,56 @@ public class GroupPro03 {
 		// 소비 습관 판단 메시지
 		String payRoutineMsg = "";
 		// 카테고리 이름 배열 - 변재원
-		String[] categoryName = {"식비", "교통", "쇼핑", "기타"};
+		String[] categoryName = {"기타", "식비", "교통", "쇼핑"};
 		
 
 		// 항목별 지출 합계 기능 작업 시작 - 재민
 //		- 항목별 지출 횟수 저장 변수	
-			int[] categoryCountSum = new int[4];				//[기타] [식비] [교통] [쇼핑] 순
+		int[] categoryCountSum = new int[4];				//[기타] [식비] [교통] [쇼핑] 순
 		
 //		[로직]
 //			1. 지출 사유 분류(for문)
 //			- 초기식 : i = 0
 //			- 조건식 : i < daysCount
 //			- 증감식 : i++
-			for(int i = 0; i < daysCount; i++) { 
+		for(int i = 0; i < daysCount; i++) { 
 //				1.switch문
-				switch(arrPayReason[i]) {
+			switch(arrPayReason[i]) {
 //				- 조건 : arrPayReason[i] = 1
-				case 1 :
+			case 1 :
 //					1. 식비 변수 1업
-					categoryCountSum[1]++;
+				categoryCountSum[1]++;
 //					2. categoryPaymentSum[1] + arrPaymentDetail[i]
-					categoryPaymentSum[1] += arrPaymentDetail[i];
-					continue;
+				categoryPaymentSum[1] += arrPaymentDetail[i];
+				continue;
 //				- 조건 : arrPayReason[i] = 2
-				case 2 :
+			case 2 :
 //					1. 교통 변수 1업
-					categoryCountSum[2]++;
+				categoryCountSum[2]++;
 //					2. categoryPaymentSum[2] + arrPaymentDetail[i]
-					categoryPaymentSum[2] += arrPaymentDetail[i];
-					continue;
+				categoryPaymentSum[2] += arrPaymentDetail[i];
+				continue;
 //				- 조건 : arrPayReason[i] = 3
-				case 3 :
+			case 3 :
 //					1. 쇼핑 변수 1업
-					categoryCountSum[3]++;
+				categoryCountSum[3]++;
 //					2. categoryPaymentSum[3] + arrPaymentDetail[i]
-					categoryPaymentSum[3] += arrPaymentDetail[i];
-					continue;
+				categoryPaymentSum[3] += arrPaymentDetail[i];
+				continue;
 //				- 그 외
-				default :
+			default :
 //					1. 기타 변수 1업
-					categoryCountSum[0]++;
+				categoryCountSum[0]++;
 //					2.categoryPaymentSum[0] +arrPaymentDetail[i]
-					categoryPaymentSum[0] += arrPaymentDetail[i];
-					continue;
-				}//switch
+				categoryPaymentSum[0] += arrPaymentDetail[i];
+				continue;
+			}//switch
 
-			}//for
-			
+		}//for
+	
+		for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+			totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+		}
 		
 		// 각종 기능 선택 및 연산(0 입력시 while문 종료)
 		while(true)
@@ -175,9 +178,7 @@ public class GroupPro03 {
 			
 			// 총 지출 금액 기능 작업 관련 시작 -준승
 			if(optionSelect == 1) {
-				for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
-					totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
-				}
+				System.out.println("총 지출금액은 " + totalPaymentSum);
 			}
 					
 			// 총 지출 금액 기능 작업 관련 종료
@@ -205,19 +206,19 @@ public class GroupPro03 {
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 시작 - 재원
 			if(optionSelect == 3) {      // 3번 옵션 선택 시 실행
-			    double limitRate = 0.5;      // 경고 비율 지정
-			    double[] categoryPerRate = new double[4];	// 카테고리 별 비율 배열
+	             double limitRate = 0.5;      // 경고 비율 지정
+	             double[] categoryPerRate = new double[4];   // 카테고리 별 비율 배열
 
-			    for(int i = 0; i < categoryPaymentSum.length; i++) {
-			        categoryPerRate[i] = (double)categoryPaymentSum[i] / totalPaymentSum;   // 항목 별 비율
+	             for(int i = 0; i < categoryPaymentSum.length; i++) {
+	                 categoryPerRate[i] = (double)categoryPaymentSum[i] / totalPaymentSum;   // 항목 별 비율
 
-			        System.out.println(categoryName[i] + " : " + (int)(categoryPerRate[i] * 100) + "%");	// 항목별 비율출력
+	                 System.out.printf("%s : %.2f%% \n", categoryName[i], categoryPerRate[i] * 100);   // 항목별 비율출력
 
-			        if(categoryPerRate[i] >= limitRate) {
-			            System.out.println(categoryName[i] + " 항목의 지출이 총 지출의 50%를 넘겼습니다.");		// 경고 메시지
-			        }
-			    }
-			}
+	                 if(categoryPerRate[i] >= limitRate) {
+	                     System.out.println("!!!"+categoryName[i] + " 항목의 지출이 총 지출의 50%를 넘겼습니다!!!");      // 경고 메시지
+	                 }
+	             }
+	         }
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 종료
 			
