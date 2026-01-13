@@ -142,17 +142,19 @@ public class GroupPro03 {
 			
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 시작 - 재원
-			if(optionSelect == 3) {
-				double limitRate = 0.5;      // 경고 비율 지정
-				double[] categoryPerRate = new double[4];	//
-		        for(int i = 0; i <= categoryPaymentSum.length; i++) {
-		           categoryPerRate[i] =  (double)(categoryPaymentSum[i] / totalPaymentSum);   // 항목 별 비율 지정
-		           
-		           System.out.println("식비 : "+ categoryPerRate[i] + "교통 : " + categoryPerRate[i] + "쇼핑 : " + categoryPerRate[i] + "기타 : " + categoryPerRate[i]);
-		           if(categoryPerRate[i] >= limitRate) {
-		              System.out.println(categoryName[i] + " 항목의 지출이 총 지출의 50%를 넘겼습니다.");	// 일정 비율 지출 경고
-		           }
-		        }
+			if(optionSelect == 3) {      // 3번 옵션 선택 시 실행
+			    double limitRate = 0.5;      // 경고 비율 지정
+			    double[] categoryPerRate = new double[4];	// 카테고리 별 비율 배열
+
+			    for(int i = 0; i < categoryPaymentSum.length; i++) {
+			        categoryPerRate[i] = (double)categoryPaymentSum[i] / totalPaymentSum;   // 항목 별 비율
+
+			        System.out.println(categoryName[i] + " : " + (int)(categoryPerRate[i] * 100) + "%");	// 항목별 비율출력
+
+			        if(categoryPerRate[i] >= limitRate) {
+			            System.out.println(categoryName[i] + " 항목의 지출이 총 지출의 50%를 넘겼습니다.");		// 경고 메시지
+			        }
+			    }
 			}
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 종료
