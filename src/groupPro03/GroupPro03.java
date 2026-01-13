@@ -284,5 +284,6 @@ public class GroupPro03 {
 		System.out.printf("총 지출 금액 : %d, 가장 많이 사용한 항목 : %s, 소비 습관 판단 메시지 : %s\n"
 				, totalPaymentSum, mostPayCategory, payRoutineMsg);
 		sc.close();
+		}
 	}
 }
