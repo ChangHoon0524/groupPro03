@@ -102,8 +102,6 @@ public class GroupPro03 {
 		int[] categoryPaymentSum = new int[4];
 		// 지출 금액 연속 증가 여부 카운트 변수
 		int increasePaymentCount = 0;
-		// 최다 사용 항목
-		String mostPayCategory = "";
 		// 소비 습관 판단 메시지
 		String payRoutineMsg = "";
 		// 카테고리 이름 배열 - 변재원
@@ -301,12 +299,10 @@ public class GroupPro03 {
 //                System.out.println();//// 의미없음 가독성용
              }
             
-			
-			// 예산 초과 여부 판단 기능 작업 종료
-		
-		System.out.printf("총 지출 금액 : %d, 가장 많이 사용한 항목 : %s, 소비 습관 판단 메시지 : %s\n"
-				, totalPaymentSum, mostPayCategory, payRoutineMsg);
-		sc.close();
 		}
+		// 예산 초과 여부 판단 기능 작업 종료		
+		System.out.printf("총 지출 금액 : %d, 소비 습관 판단 메시지 : %s\n", totalPaymentSum, payRoutineMsg);
+		
+		sc.close();
 	}
 }
