@@ -48,12 +48,10 @@ public class GroupPro03 {
 		// 입력 관련 처리
 		// 일자 입력
 		System.out.print("지출을 기록할 일일을 입력해주세요.(최소 1일) : ");
-		int daysCount = sc.nextInt();
+		int daysCount = Integer.parseInt(sc.nextLine());
 		// 예산 입력
 		System.out.print("예산을 입력해주세요 : ");
-		int budget = sc.nextInt();
-		// 엔터 소진
-		sc.nextLine();
+		int budget = Integer.parseInt(sc.nextLine());
 		
 		// 0이 들어왔을 때의 예외처리
 		daysCount = daysCount <= 0 ? 1 : daysCount;
@@ -72,7 +70,7 @@ public class GroupPro03 {
 		// 데이터 입력 처리		
 		while(count < daysCount) {
 			// 지출항목 입력
-			System.out.print("지출 항목을 입력해주세요 : ");
+			System.out.printf("현재일자 : %d, 지출 항목을 입력해주세요 : ", count + 1);
 			String payReason = sc.nextLine();
 			// 지출항목 변수 선언
 			int convertReason = 0;
@@ -89,8 +87,7 @@ public class GroupPro03 {
 			
 			// n번째 일자에 지출액 저장
 			System.out.print("지출액을 입력해주세요 : ");
-			arrPaymentDetail[count] = sc.nextInt();
-			sc.nextLine();
+			arrPaymentDetail[count] = Integer.parseInt(sc.nextLine());
 
 			count++;
 		}
@@ -165,8 +162,8 @@ public class GroupPro03 {
 					+ "\n 3. 항목별 지출 비율 체크"
 					+ "\n 4. 지출 금액 연속 증가 여부 확인"
 					+ "\n 5. 예산검정"
-					+ "\n 0. 시스템 종료");
-			int optionSelect = sc.nextInt();
+					+ "\n 0. 시스템 종료 :");
+			int optionSelect = Integer.parseInt(sc.nextLine());
 			
 			// 종료 선택 시 반복종료
 			if(optionSelect == 0)
@@ -299,6 +296,8 @@ public class GroupPro03 {
 //                System.out.println();//// 의미없음 가독성용
              }
             
+            // 가독성 향상을 위한 줄바꿈 추가
+            System.out.println();
 		}
 		// 예산 초과 여부 판단 기능 작업 종료		
 		System.out.printf("총 지출 금액 : %d, 소비 습관 판단 메시지 : %s\n", totalPaymentSum, payRoutineMsg);
