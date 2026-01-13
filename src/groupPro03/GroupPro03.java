@@ -168,6 +168,16 @@ public class GroupPro03 {
 			
 			// 예산 초과 여부 판단 기능 작업 시작 - 지수
 			
+            if(optionSelect == 5) {
+                if(totalPaymentSum == 0) {
+                   payRoutineMsg = "이번달 소비내역이 없습니다"; // 지출 소비 자체가 0일때
+                } else if(totalPaymentSum > budget) {
+                   payRoutineMsg = "예산을 초과하는 소비가 잦습니다. 지출 관리가 필요합니다.";
+                } else {
+                   payRoutineMsg = "안정적인 소비 습관입니다.";
+                }
+             }
+			
 			
 			// 예산 초과 여부 판단 기능 작업 종료
 		}
