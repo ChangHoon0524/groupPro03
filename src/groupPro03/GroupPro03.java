@@ -105,7 +105,8 @@ public class GroupPro03 {
 		String mostPayCategory = "";
 		// 소비 습관 판단 메시지
 		String payRoutineMsg = "";
-		
+		// 카테고리 이름 배열 - 변재원
+		String[] categoryName = {"식비", "교통", "쇼핑", "기타"};
 		// 각종 기능 선택 및 연산(0 입력시 while문 종료)
 		while(true)
 		{
@@ -125,11 +126,12 @@ public class GroupPro03 {
 			}
 			
 			// 총 지출 금액 기능 작업 관련 시작 -준승
-			for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
-				totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+			if(optionSelect == 1) {
+				for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+					totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+				}
 			}
-			
-			
+					
 			// 총 지출 금액 기능 작업 관련 종료
 			
 			
@@ -140,7 +142,18 @@ public class GroupPro03 {
 			
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 시작 - 재원
-			
+			if(optionSelect == 3) {
+				double limitRate = 0.5;      // 경고 비율 지정
+				double[] categoryPerRate = new double[4];	//
+		        for(int i = 0; i <= categoryPaymentSum.length; i++) {
+		           categoryPerRate[i] =  (double)(categoryPaymentSum[i] / totalPaymentSum);   // 항목 별 비율 지정
+		           
+		           System.out.println("식비 : "+ categoryPerRate[i] + "교통 : " + categoryPerRate[i] + "쇼핑 : " + categoryPerRate[i] + "기타 : " + categoryPerRate[i]);
+		           if(categoryPerRate[i] >= limitRate) {
+		              System.out.println(categoryName[i] + " 항목의 지출이 총 지출의 50%를 넘겼습니다.");	// 일정 비율 지출 경고
+		           }
+		        }
+			}
 			
 			// 특정 항목이 전체의 일정 비율 이상일 경우 경고 메시지 기능 작업 종료
 			
