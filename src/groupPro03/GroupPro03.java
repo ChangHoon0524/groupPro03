@@ -163,6 +163,33 @@ public class GroupPro03 {
 			// 지출 금액이 연속으로 증가하는 패턴 감지 기능 작업 시작 - 명근
 			
 			
+			// 1) optionSelect가 4라면 코드 실행
+			// for문으로 현재 지출과 이전 지출을 비교
+			// 2) for문 (초기식 int i =1, 조건식 arrPaymentDetail.length,증감식++)
+			// 2-1) if(arrPaymentDetail[i] > arrPaymentDetail[i-1]) 이라면
+			// # 연속으로 증가한 횟수를 저장할 변수 - 미리 선언한 increasePaymentCount사용
+			// 2-2) increasePaymentCount++; 로 증가횟수 +
+			// 2-3) else 로 증가하지 않았을때 increasePaymentCount를 0으로 초기화
+			// 3) 만약 increasePaymentCount가 1보다 높다면 최근 몇번 지출금액이 증가했는지 메세지 출력
+			// 3) 아니라면 연속으로 증가하지 않았다고 출력 
+			if (optionSelect == 4) {	
+				for (int i = 1; i < arrPaymentDetail.length; i++) {
+					if(arrPaymentDetail[i] > arrPaymentDetail[i-1]) {
+						increasePaymentCount++;
+					} else {
+						increasePaymentCount = 0;
+					}
+				}//for
+				
+				System.out.println("\n------지출 금액 연속 증가 여부 확인------");
+				if (increasePaymentCount > 1) {
+					System.out.println("최근 지출금액이 " + increasePaymentCount + "회 연속으로 증가했습니다\n");
+				} else {
+					System.out.println("최근 지출금액이 연속적으로 증가하지 않았습니다\n");
+				}
+			}
+			
+			
 			// 지출 금액이 연속으로 증가하는 패턴 감지 기능 작업 종료
 			
 			
