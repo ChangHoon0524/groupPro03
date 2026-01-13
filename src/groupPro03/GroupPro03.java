@@ -125,6 +125,9 @@ public class GroupPro03 {
 			}
 			
 			// 총 지출 금액 기능 작업 관련 시작 -준승
+			for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+				totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+			}
 			
 			
 			// 총 지출 금액 기능 작업 관련 종료
