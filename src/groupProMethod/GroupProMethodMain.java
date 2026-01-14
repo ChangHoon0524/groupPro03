@@ -112,9 +112,7 @@ public class GroupProMethodMain
 
 		}//for
 	
-		for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
-			totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
-		}
+		totalPaymentSum += gpc.totalPay(categoryPaymentSum); // 총 지출액 합계 구하는 메소드 적용 -- 준승
 		
 		// 각종 기능 선택 및 연산(0 입력시 while문 종료)
 		while(true)

@@ -49,4 +49,11 @@ public class GroupProClass
 
 		return parseInt;
 	}
+
+	public int totalPay(int[] arr) {
+		int result = 0;
+		for (int i = 0; i < arr.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+			result += arr[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+		}
+		return result;
 }
