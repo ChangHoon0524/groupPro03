@@ -45,6 +45,7 @@ public class GroupPro03 {
 	public static void main(String[] args) {
 		// 20260112 SCH 작성
 		Scanner sc = new Scanner(System.in);
+		GroupPro03 gr = new GroupPro03();
 		// 입력 관련 처리
 		// 일자 입력
 		System.out.print("지출을 기록할 일일을 입력해주세요.(최소 1일) : ");
@@ -146,12 +147,17 @@ public class GroupPro03 {
 				categoryPaymentSum[0] += arrPaymentDetail[i];
 				continue;
 			}//switch
-
+                        
 		}//for
 	
-		for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
-			totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
-		}
+//		for (int i = 0; i < categoryPaymentSum.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+//			totalPaymentSum += categoryPaymentSum[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+//		}
+		
+		//메소드화 -- 준승
+		//매개변수O, 리턴값O --> 변수 = 참조변수.메소드명(인수);
+		totalPaymentSum += gr.totalPay(categoryPaymentSum);
+		
 		
 		// 각종 기능 선택 및 연산(0 입력시 while문 종료)
 		while(true)
@@ -243,7 +249,7 @@ public class GroupPro03 {
 						}
 
 						// # 연속으로 증가한 횟수를 저장할 변수 - 미리 선언한 increasePaymentCount(연속 증가 카운트 변수)사용
-						// 2-2) increasePaymentCount++; 로 증가횟수를 1회 늘려줌
+						// 2-2) increasePaymentCount++; 로 증가횟수를 1회 늘려줌 
 						increasePaymentCount++;
 
 					} else {
@@ -304,4 +310,18 @@ public class GroupPro03 {
 		
 		sc.close();
 	}
+	
+	// 총 지출 금액 구하기 메소드화, 매개변수O, 리턴값O
+	int totalPay(int[] arr) {
+		int result = 0;
+		for (int i = 0; i < arr.length; i++) { // 항목별 지출 합계가 담긴 배열의 크기만큼 반복한다.
+			result += arr[i]; // 총 지출 합계 변수에 항목 별 지출 합계를 순차적으로 더해준다.
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 }
