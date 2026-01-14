@@ -185,53 +185,9 @@ public class GroupProMethodMain
 
 			// 1) optionSelect가 4라면 코드 실행
 			if (optionSelect == 4) {
-
-				// +) 금액들을 저장할 문자열 선언
-				String increasedAmounts = "";
-
-				// for문으로 현재 지출과 이전 지출을 비교
-				// 2) for문 (초기식 int i =1, 조건식 arrPaymentDetail.length (지출금내역 저장 배열의 길이),증감식++)
-				for (int i = 1; i < arrPaymentDetail.length; i++) {
-					// 2-1) if(arrPaymentDetail[i] > arrPaymentDetail[i-1]) 이라면 / 지금 확인하는 지출액이 이전
-					// 지출액보다 크다면
-					if (arrPaymentDetail[i] > arrPaymentDetail[i - 1]) {
-
-						// +) increasePaymentCount가 0일땐
-						// => 문자열에 "\n" + 이전 지출액 + " - " + 지금 확인하는 지출액을 문자열에 더해 저장해줌
-						if (increasePaymentCount == 0) {
-							increasedAmounts += "\n" + arrPaymentDetail[i - 1] + " - " + arrPaymentDetail[i];
-						} else {
-							// +) 아닐땐 문자열에 " - " + 지금 확인하는 지출액을 문자열에 더해 저장해줌
-							increasedAmounts += " - " + arrPaymentDetail[i];
-						}
-
-						// # 연속으로 증가한 횟수를 저장할 변수 - 미리 선언한 increasePaymentCount(연속 증가 카운트 변수)사용
-						// 2-2) increasePaymentCount++; 로 증가횟수를 1회 늘려줌
-						increasePaymentCount++;
-
-					} else {
-						// 2-3) else 로 증가하지 않았을때는 increasePaymentCount를 0으로 초기화
-						increasePaymentCount = 0;
-					}
-				} // for
-
-				// +) 금액들을 저장할 문자열이 빈칸이 아니라면
-				if (increasedAmounts != "") {
-					System.out.print("------지출 금액 증가 패턴------");
-					// +) 문자열을 출력해 지출액이 증가한 내역들을 표시
-					System.out.println(increasedAmounts);
-				}
-
-				System.out.println("\n------지출 금액 연속 증가 여부 확인------");
-				// 3) 만약 increasePaymentCount가 1보다 크다면 최근 몇번 지출금액이 증가했는지 메세지 출력
-				if (increasePaymentCount > 1) {
-					System.out.println("최근 지출금액이 " + increasePaymentCount + "회 연속으로 증가했습니다\n");
-				} else {
-					// 3) 아니라면 연속으로 증가하지 않았다고 출력
-					System.out.println("최근 지출금액이 연속적으로 증가하지 않았습니다\n");
-				}
+				//11)메소드에 지출금내역 저장 배열과 연속 증가 카운트 변수를 매개변수로 넣어 메소드를 실행
+				gpc.increaseCalc(arrPaymentDetail, increasePaymentCount);
 			}
-
 			// 지출 금액이 연속으로 증가하는 패턴 감지 기능 작업 종료
 
 
