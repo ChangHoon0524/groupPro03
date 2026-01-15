@@ -1,62 +1,25 @@
 package groupProMethod;
 
-public class GroupProClass
-{
-	// 지출항목 상수 선언
-	// 기타 : 0, 식비 : 1, 교통 : 2, 쇼핑 : 3
-	final int ETC = 0, EATTING = 1, TRANSPORT = 2, SHOPPING = 3;
-
-	public int convertReasonToInt(String reason)
-	{
-		switch (reason)
-		{
-			case "식비":
-				return EATTING;
-			case "교통":
-				return TRANSPORT;
-			case "쇼핑":
-				return SHOPPING;
-			default:
-				return ETC;
-		}
-	}
-	
-	public String convertReasonToString(int reason) {
-		switch(reason) {
-			case EATTING:
-				return "식비";
-			case TRANSPORT:
-				return "교통";
-			case SHOPPING:
-				return "쇼핑";
-			default:
-				return "기타";
-		}
-	}
-
-	// 입력받은 스트링을 int로 파싱
-	public int inputInt(String str)
-	{
-		int parseInt = 0;
-		try
-		{
-			parseInt = Integer.parseInt(str);
-		}
-		catch (NumberFormatException ex)
-		{
-			System.out.println("잘못 입력하셨습니다");
-		}
-
-		return parseInt;
-	}
-	
-	
-// ------------------------------------------------------------------------------------------	
-	
-	//항목별 사용 횟수 증가
-	int[] categoryCountup(int[] PayReason, int count) { // 지출 사유, 지출 횟수 
+public class GroupProClass{
+//	- 항목별 사용 횟수 총합 구하기 매서드
+//	1. 리턴타입 설정
+//	2. 매개변수 설정(지출 사유 배열, 지출 횟수 배열)
+//	3. 지출 사유 분류
+//		-for문(초기식 : i = 0, 조건식 : i < 지출 횟수, 증감식 : i++)
+//				1.switch문
+//				- 조건 : 지출사유 = 1 (식비)
+//					1. 식비 1업 (인덱스 = 1)
+//				- 조건 : 지출사유 = 2(교통)
+//					1. 교통 1업 (인덱스 = 2)
+//				- 조건 : 지출사유 = 3 (쇼핑)
+//					1. 쇼핑 1업 (인덱스 = 3)
+//				- 그 외
+//					1. 기타 1업
+//	4. 리턴 : 항목별 사용 횟수 배열
+//
+	int[] categoryCountup(int[] PayReason) { // 지출 사유, 지출 횟수 
 		int[] categoryCount = new int[4];
-		for(int i = 0; i < count; i++) {
+		for(int i = 0; i < PayReason.length; i++) {
 			switch(PayReason[i]) {
 			case 1 :
 				categoryCount[1]++;			//식비 1증가
@@ -76,12 +39,27 @@ public class GroupProClass
 	}//categoryCountup
 	
 	
+	//- 항목별 지불 액 총합 구하기 매서드
+//	1. 리턴타입 설정
+//	2. 매개변수 설정(지출 사유 배열, 지출 비용 배열)
+//	3. 지출 사유 분류
+//		-for문(초기식 : i = 0, 조건식 : i < 지출 횟수, 증감식 : i++)
+//				1.switch문
+//				- 조건 : 지출사유 = 1 (식비)
+//					1. 식비 지불 배열[1] += 지출 비용 배열[i]
+//				- 조건 : 지출사유 = 2(교통)
+//					1. 교통 지불 배열[2] += 지출 비용 배열[i]
+//				- 조건 : 지출사유 = 3 (쇼핑)
+//					1. 쇼핑 지불 배열[3] += 지출 비용 배열[i]
+//				- 그 외
+//					1. 기타 지불 배열[3] += 지출 비용 배열[i]
+//	4. 리턴 : 항목별 지불 배열	
 	
 	
 	//항목별 사용 금액 증가
-	int[] categoryPaySum(int[] PayReason, int[] arrPaymentDetail, int count) { //지출 사유, 지출 액, 지출 횟수
+	int[] categoryPaySum(int[] PayReason, int[] arrPaymentDetail) { //지출 사유, 지출 액, 지출 횟수
 		int[] categoryPayment = new int[4];
-		for(int i = 0; i < count; i++) {
+		for(int i = 0; i < PayReason.length; i++) {
 			switch(PayReason[i]) {
 			case 1:
 				categoryPayment[1] += arrPaymentDetail[i];		//식비 총합에 해당 순서의 지출액 추가
@@ -105,15 +83,25 @@ public class GroupProClass
 	}//categoryPaySum
 	
 
+	//- 항목별 횟수와 지불비용 출력 메서드
+//		1. 리턴타입 설정
+//		2. 매개변수 설정(항목별 사용횟수 총합 배열, 항목별 지용비율 총합 배열)
+//		3. 항목 사용 횟수 설정
+//			- for문(추기 : i = 0, 조건: i < 항목 갯수, 증감: i++)
+//				1. 항목별 사용 횟수 출력
+//		4. 항목 지불비용 설정
+//			- for문(추기 : i = 0, 조건: i < 항목 갯수, 증감: i++)
+//				1. 항목별 지불 비용 출력
+		
 	//항목별 사용 횟수와 사용 금액 출력
 	void categoryPayPrint(int[] categoryCount, int[] categoryPayment) {
 		System.out.println("기타\t식비\t교통\t쇼핑");
-		for(int i = 0; i < 4; i++) { 
+		for(int i = 0; i < categoryCount.length; i++) { 
 			System.out.print(categoryCount[i] + "번\t");	//항목 사용 횟수
 		}//for
 	
 		System.out.println();
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < categoryCount.length; i++) {
 			System.out.print(categoryPayment[i] + "\t");	//항목별 총 금액
 		}//for
 	
