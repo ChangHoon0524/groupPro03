@@ -7,36 +7,28 @@ public class GroupProMethodMain
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
-		GroupProClass gpc = new GroupProClass();
-		// 입력 관련 처리
-		// 일자 입력
+		GroupProClass gpc = new GroupProClass(); // class 추가
+//		===================소비계획 입력 시작 ======================
+
 		System.out.print("지출을 기록할 일일을 입력해주세요.(최소 1일) : ");
 		int daysCount = gpc.inputInt(sc.nextLine());
-		// 예산 입력
-		// 예산 삭제 예정
+		// 예산 입력// 예산 삭제 예정
 		System.out.print("예산을 입력해주세요 : ");
 		int budget = gpc.inputInt(sc.nextLine());
-		
-		// 0이 들어왔을 때의 예외처리
-		daysCount = daysCount <= 0 ? 1 : daysCount;
+
+		daysCount = daysCount <= 0 ? 1 : daysCount; // 0이 들어왔을 때의 예외처리
 		int count = 0;
 				
+//		===================변수 선언 ======================
 		// 메인에 남길변수
-		// 배열 선언
-		// 지출금 내역 저장 배열
-		int[] arrPaymentDetail = new int[daysCount];
-		// 지출 사유 저장 배열
-		int[] arrPayReason = new int[daysCount];		
+		int[] arrPaymentDetail = new int[daysCount]; // 지출금 내역 저장 배열		
+		int[] arrPayReason = new int[daysCount]; // 지출 사유 저장 배열		
+		int totalPaymentSum = 0; // 총 지출 합 저장 변수
+		String payRoutineMsg = ""; // 소비 습관 판단 메시지
 		
-		// 계산용 변수 선언
-		// 총 지출 합 저장 변수
-		int totalPaymentSum = 0;
-		// 소비 습관 판단 메시지
-		String payRoutineMsg = "";
 		// 이 외의 변수들은 가능한 각자 메소드에서 처리해주세요.
-		//
-		
-		// 데이터 입력 처리		
+
+//		================= 데이터 입력 처리	 ===================
 		while(count < daysCount) {
 			// 지출항목 입력
 			System.out.printf("현재일자 : %d, 지출 항목을 입력해주세요 : ", count + 1);
@@ -55,8 +47,7 @@ public class GroupProMethodMain
 			count++;
 		}
 		
-	
-		
+//		================= 메서드 작업 진행 영역	 ===================
 		
 		// 항목별 지출 합계 저장 배열
 		// 카테고리별 합계 관련 메서드에서 별도 선언 예정
@@ -233,34 +224,14 @@ public class GroupProMethodMain
 			}
 
 			// 지출 금액이 연속으로 증가하는 패턴 감지 기능 작업 종료
-
-
-			// 예산 초과 여부 판단 기능 작업 시작 - (최종수정 260113 16:19)지수v0.2
-
-			if (totalPaymentSum == 0) { // 분기별 노출 메시지 저장
-				payRoutineMsg = "이번달 소비내역이 없습니다!"; // 지출 소비 자체가 0일때
-			} else if (totalPaymentSum > budget) {
-				payRoutineMsg = "예산초과 입니다!!";
-			} else {
-				payRoutineMsg = "안정적인 소비 습관입니다.";
-            }
 			
-//			5번 옵션시 분기별 메시지 출력 추가
-			
-            if(optionSelect == 5) { // 5번 메뉴로 바로 진입시 노출
-//            	System.out.println(); // 의미없음 가독성용
-                if(totalPaymentSum == 0) {
-                	System.out.println("\n이번달 소비내역이 없습니다\n");
-                } else if(totalPaymentSum > budget) {
-                	System.out.println("\n예산을 초과하는 소비가 잦습니다. 지출 관리가 필요합니다.\n");
-                } else {
-                	System.out.println("\n안정적인 소비 습관입니다.\n");
-				}
-//                System.out.println();//// 의미없음 가독성용
-             }
-            
+//		================= 예산 초과 여부 판단 메소드 호출	 ===================
+			payRoutineMsg = gpc.ctResult(totalPaymentSum,  budget);
+			String ctResultMsg = gpc.ctResultD(totalPaymentSum,  budget, daysCount);
+
+            if(optionSelect == 5)
             // 가독성 향상을 위한 줄바꿈 추가
-            System.out.println();
+            System.out.println(ctResultMsg);
 		}
 		// 예산 초과 여부 판단 기능 작업 종료		
 		System.out.printf("총 지출 금액 : %d, 소비 습관 판단 메시지 : %s\n", totalPaymentSum, payRoutineMsg);

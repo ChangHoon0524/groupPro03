@@ -49,4 +49,48 @@ public class GroupProClass
 
 		return parseInt;
 	}
+	
+// 예산 초과 여부 판단 기능 작업 메소드 작업 - (최종수정 260114)지수v0.3
+	
+//	Consumer tendency Result = 소비성향결과
+	
+	public String ctResult(int totalPaymentSum, int budget ) {
+		
+		if (totalPaymentSum == 0) { // 분기별 노출 메시지 저장
+			 // 지출 소비 자체가 0일때
+			return  "이번달 소비내역이 없습니다";
+		} else if (totalPaymentSum > budget) {
+			//예산초과
+			return  "예산을 초과하는 소비가 잦습니다. 지출 관리가 필요합니다.";
+		} else {
+			//예산 안정
+			return  "안정적인 소비 습관입니다";
+		}
+
+
+	}
+	
+	public String ctResultD(int totalPaymentSum, int budget, int daysCount ) {
+		
+		if (totalPaymentSum == 0) { // 분기별 노출 메시지 저장
+			// 지출 소비 자체가 0일때
+			return  "이번달 소비내역이 없습니다";
+		} else if (totalPaymentSum > budget) {
+			//예산초과
+			return  "예산을 초과하는 소비가 잦습니다." + daysCount+ "일동안 예산의 " + (totalPaymentSum-budget) + "원 초과하셨습니다";
+		} else {
+			//예산 안정
+			return  "안정적인 소비 습관입니다";
+		}
+		
+	}
+	
 }
+	
+	
+
+
+
+
+
+
